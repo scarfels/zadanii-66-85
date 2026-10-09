@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Practice</title>
+    <style>
+        .light {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 10px;
+            opacity: 0.3;
+        }
+        #red { background-color: red; }
+        #yellow { background-color: yellow; }
+        #green { background-color: green; }
+    </style>
+</head>
+<body>
+    <h1>Практические задания 66–85</h1>
+    <p>Задания 66–80 смотрите в консоли (F12 → Console). Задания 81–85 работают прямо на странице.</p>
+
+    <h2>Задание 81. Генератор случайных чисел</h2>
+    <button id="generateButton">Сгенерировать</button>
+    <p id="randomResult"></p>
+
+    <h2>Задание 82. Светофор</h2>
+    <div class="light" id="red"></div>
+    <div class="light" id="yellow"></div>
+    <div class="light" id="green"></div>
+    <p id="lightText"></p>
+    <button id="redButton">Красный</button>
+    <button id="yellowButton">Жёлтый</button>
+    <button id="greenButton">Зелёный</button>
+    <button id="autoButton">Автопереключение</button>
+
+    <h2>Задание 83. Поиск студента</h2>
+    <input type="text" id="searchInput" placeholder="Введите имя">
+    <button id="searchButton">Найти</button>
+    <p id="searchResult"></p>
+
+    <h2>Задание 84. Стоимость компьютера</h2>
+    <p><input type="checkbox" class="part" value="85000"> Процессор — 85 000 ₸</p>
+    <p><input type="checkbox" class="part" value="35000"> Оперативная память — 35 000 ₸</p>
+    <p><input type="checkbox" class="part" value="28000"> SSD — 28 000 ₸</p>
+    <p><input type="checkbox" class="part" value="180000"> Видеокарта — 180 000 ₸</p>
+    <p><input type="checkbox" class="part" value="25000"> Корпус — 25 000 ₸</p>
+    <button id="calcButton">Рассчитать стоимость</button>
+    <p id="calcResult"></p>
+
+    <h2>Задание 85. Электронная библиотека</h2>
+    <input type="text" id="bookSearch" placeholder="Название книги">
+    <input type="checkbox" id="onlyAvailable"> Только доступные
+    <div id="bookList"></div>
+
+    <script>
+        {
+            console.log("Задание 66");
+            let speed = 25;
+            if (speed < 0) {
+                console.log("Некорректная скорость");
+            } else if (speed === 0) {
+                console.log("Нет подключения");
+            } else if (speed <= 10) {
+                console.log("Медленный интернет");
+            } else if (speed <= 50) {
+                console.log("Средняя скорость");
+            } else {
+                console.log("Быстрый интернет");
+            }
+        }
+
+        {
+            console.log("Задание 67");
+            let login = "admin";
+            let password = "12345";
+            if (login === "admin" && password === "12345") {
+                console.log("Вход выполнен");
+            } else if (login === "admin") {
+                console.log("Неверный пароль");
+            } else {
+                console.log("Ошибка авторизации");
+            }
+        }
+
+        {
+            console.log("Задание 68");
+            let hour = 14;
+            if (hour < 0 || hour > 23) {
+                console.log("Некорректное значение часа");
+            } else if (hour >= 8 && hour < 18) {
+                console.log("Кабинет работает");
+            } else {
+                console.log("Кабинет закрыт");
+            }
+        }
+
+        {
+            console.log("Задание 69");
+            let cpuTemperature = 75;
+            if (cpuTemperature < 40) {
+                console.log("Температура низкая");
+            } else if (cpuTemperature < 70) {
+                console.log("Температура нормальная");
+            } else if (cpuTemperature < 90) {
+                console.log("Температура высокая");
+            } else {
+                console.log("Температура критическая!");
+                console.log("Предупреждение: выключите компьютер");
+            }
+        }
+
+        {
+            console.log("Задание 70");
+            let attendance = 85;
+            let averageScore = 70;
+            if (attendance >= 80 && averageScore >= 50) {
+                console.log("Допущен к экзамену");
+            } else if (attendance < 80 && averageScore < 50) {
+                console.log("Не допущен: низкая посещаемость и низкий средний балл");
+            } else if (attendance < 80) {
+                console.log("Не допущен: низкая посещаемость");
+            } else {
+                console.log("Не допущен: низкий средний балл");
+            }
+        }
+
+        {
+            console.log("Задание 71");
+            let equipment = [250000, 180000, 320000, 150000, 200000];
+            let total = 0;
+            for (let i = 0; i < equipment.length; i++) {
+                total = total + equipment[i];
+            }
+            console.log("Общая стоимость: " + total + " ₸");
+            console.log("Средняя стоимость: " + total / equipment.length + " ₸");
+        }
+
+        {
+            console.log("Задание 72");
+            let scores = [78, 95, 43, 67, 88, 50, 91];
+            let minScore = scores[0];
+            let count = 0;
+            for (let i = 0; i < scores.length; i++) {
+                if (scores[i] < minScore) {
+                    minScore = scores[i];
+                }
+                if (scores[i] < 50) {
+                    count++;
+                }
+            }
+            console.log("Минимальный балл: " + minScore);
+            console.log("Набрали меньше 50 баллов: " + count);
+        }
+
+        {
+            console.log("Задание 73");
+            for (let i = 1; i <= 20; i++) {
+                console.log(i + " → " + i * i);
+            }
+        }
+
+        {
+            console.log("Задание 74");
+            let groups = [24, 22, 25, 20, 23, 21];
+            let total = 0;
+            let maxGroup = groups[0];
+            let count = 0;
+            for (let i = 0; i < groups.length; i++) {
+                total = total + groups[i];
+                if (groups[i] > maxGroup) {
+                    maxGroup = groups[i];
+                }
+                if (groups[i] > 22) {
+                    count++;
+                }
+            }
+            console.log("Всего студентов: " + total);
+            console.log("Средняя численность группы: " + total / groups.length);
+            console.log("Самая большая группа: " + maxGroup);
+            console.log("Групп больше 22 студентов: " + count);
+        }
+
+        {
+            console.log("Задание 75");
+            let numbers = [12, 7, 18, 5, 24, 9, 30, 11];
+            let evenNumbers = [];
+            let oddNumbers = [];
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i] % 2 === 0) {
+                    evenNumbers.push(numbers[i]);
+                } else {
+                    oddNumbers.push(numbers[i]);
+                }
+            }
+            console.log("Чётные:", evenNumbers);
+            console.log("Нечётные:", oddNumbers);
+        }
+
+        {
+            console.log("Задание 76");
+            function calculateTuition(monthlyFee, months) {
+                if (monthlyFee <= 0 || months <= 0) {
+                    return "Значения должны быть положительными";
+                }
+                return monthlyFee * months;
+            }
+            console.log("Стоимость обучения: " + calculateTuition(25000, 8) + " ₸");
+            console.log(calculateTuition(-25000, 8));
+        }
+
+        {
+            console.log("Задание 77");
+            function checkEmail(email) {
+                let at = email.indexOf("@");
+                let dot = email.indexOf(".", at);
+                if (at > 0 && dot > at + 1 && dot < email.length - 1) {
+                    return "Формат email корректен";
+                } else {
+                    return "Ошибка email";
+                }
+            }
+            let email = "student@gmail.com";
+            console.log(email + ": " + checkEmail(email));
+            console.log("student.gmail.com: " + checkEmail("student.gmail.com"));
+            console.log("@gmail.com: " + checkEmail("@gmail.com"));
+            console.log("student@.com: " + checkEmail("student@.com"));
+        }
+
+        {
+            console.log("Задание 78");
+            let computer = {
+                id: 1,
+                processor: "Intel Core i5",
+                ram: 16,
+                storage: 512,
+                working: true
+            };
+            console.log("ID: " + computer.id);
+            console.log("Процессор: " + computer.processor);
+            console.log("ОЗУ: " + computer.ram + " ГБ");
+            console.log("Память: " + computer.storage + " ГБ");
+            if (computer.working === true) {
+                console.log("Исправен");
+            } else {
+                console.log("Требуется ремонт");
+            }
+            computer.room = 21;
+            computer.ram = 32;
+            console.log(computer);
+        }
+
+        {
+            console.log("Задание 79");
+            function calculateBonus(tasks) {
+                if (tasks < 0) {
+                    return "Некорректное число задач";
+                } else if (tasks < 5) {
+                    return 0;
+                } else if (tasks < 10) {
+                    return 10000;
+                } else if (tasks < 15) {
+                    return 20000;
+                } else {
+                    return 35000;
+                }
+            }
+            console.log("3 задачи: " + calculateBonus(3));
+            console.log("7 задач: " + calculateBonus(7));
+            console.log("12 задач: " + calculateBonus(12));
+            console.log("18 задач: " + calculateBonus(18));
+            console.log("-2 задачи: " + calculateBonus(-2));
+        }
+
+        {
+            console.log("Задание 80");
+            let students = [
+                { name: "Алия", score: 87 },
+                { name: "Арман", score: 94 },
+                { name: "Данияр", score: 76 },
+                { name: "Мадина", score: 98 }
+            ];
+            let best = students[0];
+            for (let i = 0; i < students.length; i++) {
+                if (students[i].score > best.score) {
+                    best = students[i];
+                }
+            }
+            console.log("Лучший студент: " + best.name);
+            console.log("Результат: " + best.score);
+            console.log("Студенты с баллом 90 и выше:");
+            for (let i = 0; i < students.length; i++) {
+                if (students[i].score >= 90) {
+                    console.log(students[i].name + " — " + students[i].score);
+                }
+            }
+        }
+
+        {
+            let generateButton = document.getElementById("generateButton");
+            let randomResult = document.getElementById("randomResult");
+
+            generateButton.addEventListener("click", function () {
+                let number = Math.floor(Math.random() * 100) + 1;
+                randomResult.textContent = "Число: " + number;
+            });
+        }
+
+        {
+            let red = document.getElementById("red");
+            let yellow = document.getElementById("yellow");
+            let green = document.getElementById("green");
+            let lightText = document.getElementById("lightText");
+            let timer = null;
+            let current = 0;
+
+            function showLight(color) {
+                red.style.opacity = 0.3;
+                yellow.style.opacity = 0.3;
+                green.style.opacity = 0.3;
+                if (color === "red") {
+                    red.style.opacity = 1;
+                    lightText.textContent = "Стой";
+                } else if (color === "yellow") {
+                    yellow.style.opacity = 1;
+                    lightText.textContent = "Внимание";
+                } else {
+                    green.style.opacity = 1;
+                    lightText.textContent = "Иди";
+                }
+            }
+
+            document.getElementById("redButton").addEventListener("click", function () {
+                showLight("red");
+            });
+            document.getElementById("yellowButton").addEventListener("click", function () {
+                showLight("yellow");
+            });
+            document.getElementById("greenButton").addEventListener("click", function () {
+                showLight("green");
+            });
+
+            document.getElementById("autoButton").addEventListener("click", function () {
+                if (timer === null) {
+                    let colors = ["red", "yellow", "green"];
+                    timer = setInterval(function () {
+                        showLight(colors[current]);
+                        current++;
+                        if (current === colors.length) {
+                            current = 0;
+                        }
+                    }, 2000);
+                } else {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            });
+        }
+
+        {
+            let names = ["Алия", "Арман", "Данияр", "Мадина", "Руслан", "Аружан", "Али", "Асель", "Тимур", "Динара"];
+            let searchInput = document.getElementById("searchInput");
+            let searchResult = document.getElementById("searchResult");
+
+            document.getElementById("searchButton").addEventListener("click", function () {
+                let text = searchInput.value.trim().toLowerCase();
+                let found = [];
+                if (text !== "") {
+                    for (let i = 0; i < names.length; i++) {
+                        if (names[i].toLowerCase().includes(text)) {
+                            found.push(names[i]);
+                        }
+                    }
+                }
+                if (found.length > 0) {
+                    searchResult.textContent = "Найдено: " + found.join(", ");
+                } else {
+                    searchResult.textContent = "Студент не найден";
+                }
+            });
+        }
+
+        {
+            let checkboxes = document.getElementsByClassName("part");
+            let calcResult = document.getElementById("calcResult");
+
+            document.getElementById("calcButton").addEventListener("click", function () {
+                let total = 0;
+                for (let i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        total = total + Number(checkboxes[i].value);
+                    }
+                }
+                calcResult.textContent = "Итоговая стоимость: " + total + " ₸";
+            });
+        }
+
+        {
+            let books = [
+                { title: "JavaScript Basics", author: "Ivanov", available: true },
+                { title: "HTML and CSS", author: "Petrov", available: false },
+                { title: "Python Programming", author: "Sidorov", available: true },
+                { title: "Database Systems", author: "Akhmetov", available: true }
+            ];
+            let bookSearch = document.getElementById("bookSearch");
+            let onlyAvailable = document.getElementById("onlyAvailable");
+            let bookList = document.getElementById("bookList");
+
+            function showBooks() {
+                let text = bookSearch.value.trim().toLowerCase();
+                let result = books.filter(function (book) {
+                    let nameMatch = book.title.toLowerCase().includes(text);
+                    let availableMatch = !onlyAvailable.checked || book.available;
+                    return nameMatch && availableMatch;
+                });
+
+                bookList.innerHTML = "";
+
+                if (result.length === 0) {
+                    bookList.textContent = "Книги не найдены";
+                    return;
+                }
+
+                for (let i = 0; i < result.length; i++) {
+                    let book = result[i];
+                    let p = document.createElement("p");
+                    let status = book.available ? "в наличии" : "выдана";
+                    p.textContent = book.title + " — " + book.author + " (" + status + ") ";
+
+                    if (book.available) {
+                        let button = document.createElement("button");
+                        button.textContent = "Взять книгу";
+                        button.addEventListener("click", function () {
+                            book.available = false;
+                            showBooks();
+                        });
+                        p.appendChild(button);
+                    }
+
+                    bookList.appendChild(p);
+                }
+            }
+
+            bookSearch.addEventListener("input", showBooks);
+            onlyAvailable.addEventListener("change", showBooks);
+            showBooks();
+        }
+    </script>
+</body>
+</html>
